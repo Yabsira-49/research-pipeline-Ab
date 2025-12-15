@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Research Pipeline - Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .reset-btn {
+            background: #ecf0f1;
+            color: #333;
+        }
+
+        .reset-btn:hover {
+            background: #d5dbdb;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 AI Research Pipeline</h1>
+        <p class="subtitle">Submit your research topic and get an AI-generated report with human approval</p>
+
+        <div id="message" class="message"></div>
+
+        <form id="researchForm">
+            <div class="form-group">
+                <label for="topic">
+                    Research Topic <span class="required">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="topic" 
+                    name="topic" 
+                    placeholder="e.g., Price Action vs Indicator-Based Trading"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="subtopics">
+                    Subtopics <span class="required">(optional)</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="subtopics" 
+                    name="subtopics" 
+                    placeholder="e.g., risk management, psychology, prop firms"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">
+                    Description <span class="required">(optional)</span>
+                </label>
+                <textarea 
+                    id="description" 
+                    name="description" 
+                    placeholder="e.g., For prop trading students, intermediate level"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewerEmail">
+                    Reviewer Email <span class="required">*</span>
+                </label>
+                <input 
+                    type="email" 
+                    id="reviewerEmail" 
+                    name="reviewerEmail" 
+                    placeholder="reviewer@example.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="userEmail">
+                    Your Email <span class="required">(optional)</span>
+                </label>
+                <input 
+                    type="email" 
+                    id="userEmail" 
+                    name="userEmail" 
+                    placeholder="your@example.com"
+                >
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Submitting your request...</p>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">🚀 Submit Research Request</button>
+                <button type="reset" class="reset-btn">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('researchForm');
+        const messageDiv = document.getElementById('message');
+        const loadingDiv = document.getElementById('loading');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            messageDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
+
+            // Collect form data
+            const formData = {
+                topic: document.getElementById('topic').value,
+                subtopics: document.getElementById('subtopics').value,
+                description: document.getElementById('description').value,
+                reviewerEmail: document.getElementById('reviewerEmail').value,
+                userEmail: document.getElementById('userEmail').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // N8N Webhook URL - Connected to your workflow
+                const webhookUrl = 'https://yabsira12.app.n8n.cloud/webhook-test/dba7b997-612b-4bd1-9945-102b8c6d95aa';
+
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = '✅ Research request submitted successfully! The reviewer will receive it shortly.';
+                    messageDiv.style.display = 'block';
+                    form.reset();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                messageDiv.className = 'message error';
+                messageDiv.textContent = '❌ Error submitting form. Please check the webhook URL and try again.';
+                messageDiv.style.display = 'block';
+                console.error('Error:', error);
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
